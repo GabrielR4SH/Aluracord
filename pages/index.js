@@ -2,35 +2,7 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
-
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */ 
-      html, body, #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */ 
-    `}</style>
-  );
-}
+import { useState } from 'react';
 
 function Titulo(props) {
   const Tag = props.tag || 'h1';
@@ -62,19 +34,17 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-  //const username = 'GabrielR4SH';
-
-  const [username, setUsername] = React.useState('');
+  
+  const [username, setUsername] = useState('GabrielR4SH');
   const roteamento = useRouter();
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+          backgroundImage: 'url(https://th.bing.com/th/id/R.955f96480f3c735b3ebea88c489da352?rik=H5phdh6z7tVvSQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f3%2fd%2f3%2f1193570-vivid-wallpaper-1920x1080-for-phone.jpg&ehk=1iN3FIzhCObZLYDBqvVAZ%2betIAfO47SN%2bxmQDwwisc0%3d&risl=&pid=ImgRaw&r=0)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
@@ -96,8 +66,9 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
-            onSubmit={(e) =>{
+            onSubmit = {(e)=>{
               e.preventDefault();
+              //window.location.href ='/chat'
               roteamento.push('/chat');
             }}
             styleSheet={{
@@ -109,13 +80,14 @@ export default function PaginaInicial() {
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text>
-
+            
+            {
             <TextField
-             value={username}
-             onChange={(e) => {
-               const valor = e.target.value;
-               setUsername(valor)
-             }}
+            value={username}
+            onChange = {(e) => {
+              //const value = e.target.value;
+              setUsername(e.target.value);
+            }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -125,7 +97,10 @@ export default function PaginaInicial() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 },
               }}
+              
             />
+            }
+
             <Button
               type='submit'
               label='Entrar'
