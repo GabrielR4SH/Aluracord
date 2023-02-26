@@ -2,7 +2,6 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
-import { useState } from 'react';
 
 function Titulo(props) {
   const Tag = props.tag || 'h1';
@@ -34,8 +33,8 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-  
-  const [username, setUsername] = useState('GabrielR4SH');
+  // const username = 'omariosouto';
+  const [username, setUsername] = React.useState('omariosouto');
   const roteamento = useRouter();
 
   return (
@@ -44,7 +43,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(https://th.bing.com/th/id/R.955f96480f3c735b3ebea88c489da352?rik=H5phdh6z7tVvSQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f3%2fd%2f3%2f1193570-vivid-wallpaper-1920x1080-for-phone.jpg&ehk=1iN3FIzhCObZLYDBqvVAZ%2betIAfO47SN%2bxmQDwwisc0%3d&risl=&pid=ImgRaw&r=0)',
+          backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
@@ -66,10 +65,11 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
-            onSubmit = {(e)=>{
-              e.preventDefault();
-              //window.location.href ='/chat'
+            onSubmit={function (infosDoEvento) {
+              infosDoEvento.preventDefault();
+              console.log('Alguém submeteu o form');
               roteamento.push('/chat');
+              // window.location.href = '/chat';
             }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -80,14 +80,29 @@ export default function PaginaInicial() {
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text>
-            
-            {
+
+            {/* <input
+                            type="text"
+                            value={username}
+                            onChange={function (event) {
+                                console.log('usuario digitou', event.target.value);
+                                // Onde ta o valor?
+                                const valor = event.target.value;
+                                // Trocar o valor da variavel
+                                // através do React e avise quem precisa
+                                setUsername(valor);
+                            }}
+                        /> */}
             <TextField
-            value={username}
-            onChange = {(e) => {
-              //const value = e.target.value;
-              setUsername(e.target.value);
-            }}
+              value={username}
+              onChange={function (event) {
+                console.log('usuario digitou', event.target.value);
+                // Onde ta o valor?
+                const valor = event.target.value;
+                // Trocar o valor da variavel
+                // através do React e avise quem precisa
+                setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -97,10 +112,7 @@ export default function PaginaInicial() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 },
               }}
-              
             />
-            }
-
             <Button
               type='submit'
               label='Entrar'
