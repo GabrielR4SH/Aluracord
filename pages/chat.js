@@ -1,6 +1,7 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
 import axios from 'axios';
 
@@ -12,6 +13,8 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 export default function ChatPage() {
+  const router = useRouter();
+  const username = router.query.username;
   const [mensagem, setMensagem] = React.useState('');
   const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
@@ -27,8 +30,9 @@ export default function ChatPage() {
   }, []);
 
   function handleNovaMensagem(novaMensagem) {
+  const nameuser = router.query.username;
   const mensagem = {
-    de: 'vanessametonini',
+    de: username,
     texto: novaMensagem,
   };
 
@@ -88,13 +92,6 @@ export default function ChatPage() {
           }}
         >
           <MessageList mensagens={listaDeMensagens} />
-          {/* {listaDeMensagens.map((mensagemAtual) => {
-                        return (
-                            <li key={mensagemAtual.id}>
-                                {mensagemAtual.de}: {mensagemAtual.texto}
-                            </li>
-                        )
-                    })} */}
           <Box
             as="form"
             styleSheet={{

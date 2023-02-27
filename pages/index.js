@@ -19,22 +19,9 @@ function Titulo(props) {
   );
 }
 
-// Componente React
-// function HomePage() {
-//     // JSX
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Titulo tag="h2">Boas vindas de volta!</Titulo>
-//             <h2>Discord - Alura Matrix</h2>
-//         </div>
-//     )
-// }
-// export default HomePage
-
 export default function PaginaInicial() {
-  // const username = 'omariosouto';
-  const [username, setUsername] = React.useState('omariosouto');
+  
+  const [username, setUsername] = React.useState('GabrielR4SH');
   const roteamento = useRouter();
 
   return (
@@ -42,9 +29,8 @@ export default function PaginaInicial() {
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
-          backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+          backgroundImage: 'url(https://marmotamaps.com/de/fx/wallpaper/download/faszinationen/Marmotamaps_Wallpaper_Inntal_Desktop_1920x1080.jpg)',
+          backgroundRepeat: 'no-repeat', backgroundBlendMode: 'multiply',
         }}
       >
         <Box
@@ -68,7 +54,7 @@ export default function PaginaInicial() {
             onSubmit={function (infosDoEvento) {
               infosDoEvento.preventDefault();
               console.log('Alguém submeteu o form');
-              roteamento.push('/chat');
+              roteamento.push('/chat?username=' + username);
               // window.location.href = '/chat';
             }}
             styleSheet={{
@@ -76,31 +62,16 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
+            <Titulo tag="h2">Bem vindo</Titulo>
+            <Titulo tag="h3">Digite seu usuario do github para aparecer sua foto e entrar</Titulo>
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text>
 
-            {/* <input
-                            type="text"
-                            value={username}
-                            onChange={function (event) {
-                                console.log('usuario digitou', event.target.value);
-                                // Onde ta o valor?
-                                const valor = event.target.value;
-                                // Trocar o valor da variavel
-                                // através do React e avise quem precisa
-                                setUsername(valor);
-                            }}
-                        /> */}
             <TextField
               value={username}
               onChange={function (event) {
-                console.log('usuario digitou', event.target.value);
-                // Onde ta o valor?
                 const valor = event.target.value;
-                // Trocar o valor da variavel
-                // através do React e avise quem precisa
                 setUsername(valor);
               }}
               fullWidth
@@ -125,9 +96,6 @@ export default function PaginaInicial() {
               }}
             />
           </Box>
-          {/* Formulário */}
-
-
           {/* Photo Area */}
           <Box
             styleSheet={{
@@ -166,6 +134,7 @@ export default function PaginaInicial() {
           {/* Photo Area */}
         </Box>
       </Box>
+
     </>
   );
 }
